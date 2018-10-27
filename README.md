@@ -1,10 +1,24 @@
 # logparser
+
+High level doc:
+Main - main class
+FileReader- reads the file as the per the path passed in args
+DbHelper - has relevant db access logic
+AccessLog- Java model where values parsed from the log file are set before saving to db
+main/resources/META-INF/persistence.xml - JPA persistence unit setup here. Replace javax.persistence.jdbc.url,javax.persistence.jdbc.user,javax.persistence.jdbc.password with local db values before building a jar file
+
 To run this project in the commandline execute 
 
-The following are the two db tables for the app:
 
 java -cp "uber-logparser-0.0.1-SNAPSHOT.jar" com.wallethub.logparser.Main --threshold=100 --accesslog=/Users/jmaina/Downloads/Java_MySQL_Test/access.log --startDate=2017-01-01.15:00:00 --duration=hourly --threshold=200
  args --threshold=100
+ 
+ **NB** The jar file expects MySQL username/password to be root/r00t respectively
+ 
+ *To build a new jar file, execute mvn package then go to target/ folder*
+ 
+ 
+The following are the two db tables for the app:
 
 ACCESSLOG
 ============
