@@ -1,0 +1,18 @@
+databaseChangeLog:
+    - changeSet:
+        id: 1
+        author: jm
+        comment: "create table access_logs"
+        changes:
+            - sql:
+                sql: CREATE TABLE access_logs (
+                    id bigint NOT NULL AUTO_INCREMENT,
+                    log_date datetime DEFAULT NULL,
+                    last_updated_at datetime DEFAULT NULL,
+                    ip text DEFAULT NULL,
+                    request text DEFAULT NULL,
+                    ip request DEFAULT NULL,
+                    status int DEFAULT 0,
+                    user_agent text DEFAULT NULL,
+                    PRIMARY KEY (id)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
