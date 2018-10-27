@@ -37,5 +37,9 @@ Java string: "select a.*, CASE WHEN total > 200 THEN 'Hourly limit exceeded' WHE
 				
 e.g select a.*, CASE WHEN total > 200 THEN 'Hourly limit exceeded' WHEN total >500 THEN 'Daily limit exceeded' ELSE '' END as comment from (SELECT ip,count(ip) as total FROM accesslog  where LOGDATE BETWEEN '2017-01-01.15:00:00' AND '2017-01-01.16:00:00' group by ip) a  where total>200;
 
+The results of the query above are also loaded to another MySQL table with comments on why ip is blocked as follows:
+
+INSERT INTO blocked_ips (ip,total,comment) select a.*, CASE WHEN total > 200 THEN 'Hourly limit exceeded' WHEN total >500 THEN 'Daily limit exceeded' ELSE '' END as comment from (SELECT ip,count(ip) as total FROM accesslog  where LOGDATE BETWEEN '2017-01-01.15:00:00' AND '2017-01-01.16:00:00' group by ip) a  where total>200;
+
 Find requests made by a given IP
 select ip from accesslog where ip=:ip
