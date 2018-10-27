@@ -33,5 +33,9 @@ SQL TEST QUERIES
 Find IPs that mode more than a certain number of requests for a given time period:
 Java string: "select a.*, CASE WHEN total > 200 THEN 'Hourly limit exceeded' WHEN total >500 THEN 'Dialy limit exceeded' ELSE '' END as comment from (SELECT ip,count(ip) as total FROM accesslog  where LOGDATE BETWEEN '"
 				+ startDate + "' AND '" + endDate + "' group by ip) a  where total>" + threshold + ";"
+				
+				
 e.g select a.*, CASE WHEN total > 200 THEN 'Hourly limit exceeded' WHEN total >500 THEN 'Daily limit exceeded' ELSE '' END as comment from (SELECT ip,count(ip) as total FROM accesslog  where LOGDATE BETWEEN '2017-01-01.15:00:00' AND '2017-01-01.16:00:00' group by ip) a  where total>200;
 
+Find requests made by a given IP
+select ip from accesslog where ip=:ip
